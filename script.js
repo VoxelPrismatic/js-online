@@ -52,41 +52,42 @@ function arrow(thing) {
     doc.getElementById("v").focus();
 } function interpret():
   try {
-    c = doc.getElementById("c")
-    v = doc.getElementById("v")
-    nl = v.innerHTML.replace("\u200b", "")[1:]
+    c = doc.getElementById("c");
+    v = doc.getElementById("v");
+    nl = v.innerHTML.replace("\u200b", "")[1:];
     while (nl[-1] == " ") {
-        nl = nl[:-1]
+        nl = nl[:-1];
     } if (stdin != "") {
-        stdin += "\n"+nl
+        stdin += "\n"+nl;
     } else {
-        stdin = nl
-    } if (stdin[-1] == "{" || (thing.contains(".") and nl != "")):
+        stdin = nl;
+    } if (stdin[-1] == "{" || (thing.contains(".") && nl != "")):
         if (thing == ">>> ")
-            thing = "... "
-        arrow(thing)
-        win.set_timeout(5, focuser)
+            thing = "... ";
+        arrow(thing);
+        win.set_timeout(5, focuser);
         return
     try {
-            exec(stdin, locals = all, globals = all)
+            exec(stdin);
             try {
-                out = eval(stdin.strip(), locals={"print": null_print}, globals=all)
+                out = eval(stdin);
             } catch (err) {
                 out = null;
             }
-            c.innerHTML += `<div class="rtn">${serial("<"+(typeof out)+"> "+out)}</div>`
+            c.innerHTML += `<div class="rtn">${serial("<"+(typeof out)+"> "+out)}</div>`;
         catch (err) {
-            c.innerHTML += `<div class="err">${err}</div>`
+            c.innerHTML += `<div class="err">${err}</div>`;
         }
-        thing = ">>> "
-        arrow(thing)
-        win.set_timeout(5, focuser)
-        stdin = ""
+        thing = ">>> ";
+        arrow(thing);
+        win.set_timeout(5, focuser);
+        stdin = "";
   catch (err) {
-    print(ex);
+      print(ex);
   }
-def keys(k):
-    if k.key == "Enter":
-        interpret()
-arrow(thing)
-win.set_timeout(5, focuser)
+function keys(k) {
+    if (k.key == "Enter")
+        interpret();
+}
+arrow(thing);
+win.set_timeout(5, focuser);
