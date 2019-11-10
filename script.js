@@ -62,7 +62,7 @@ function arrow(thing) {
     var c = doc.getElementById("c");
     var v = doc.getElementById("v");
     var nl = v.innerHTML.replace("\u200b", "").slice(1);
-    nl = nl.replace(/ *$/, "")
+    nl = nl.replace(/ *$/, "");
     if (stdin != "") {
         stdin += "\n"+nl;
     } else {
@@ -74,12 +74,8 @@ function arrow(thing) {
         win.setTimeout(focuser, 5);
         return;
     } try {
-        exec(stdin);
-        try {
-            out = eval(stdin);
-        } catch (err) {
-            out = null;
-        }
+        console.log = null_print
+        out = eval(stdin);
         c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class": "rtn"}));
     } catch (err) {
         c.appendChild(elem("div", `${err}`, {"class": "err"}));
@@ -90,7 +86,7 @@ function arrow(thing) {
     stdin = "";
   }
   catch (err) {
-    print(ex);
+    print(err);
   }
 } function keys(k) {
     if (k.key == "Enter")
