@@ -3,13 +3,10 @@ doc = document;
 function elem(type, content, kw) {
     e = doc.createElement(type);
     e.appendChild(doc.createTextNode(content));
-    if (kw.has("class"))
-        e.className = kw.get("class")
-    if (kw.has("id"))
-        e.id = kw.get("id")
-    if (kw.has("style"))
-        e.setAttribute("style", kw.get("style"));
-    return e
+    e.className = kw["class"]
+    e.id = kw["id"]
+    e.setAttribute("style", kw["style"]);
+    return e;
 }
 function get_js_version () {
     this.jsv = {
@@ -28,8 +25,8 @@ function get_js_version () {
 }
 var c = doc.getElementById("c")
 var ver = get_js_version()+".0"
-c.appendChild(elem("div", `------ JAVASCRIPT ${ver} ;] ------`, {"style" => 'text-align: center'}))
-c.appendChild(elem("div", `----- INTERPRETER v1.2.5 ;] -----`, {"style" => 'text-align: center'}))
+c.appendChild(elem("div", `------ JAVASCRIPT ${ver} ;] ------`, {"style": 'text-align: center'}))
+c.appendChild(elem("div", `----- INTERPRETER v1.2.5 ;] -----`, {"style": 'text-align: center'}))
 var thing = ">>> ";
 var stdin = "";
 function arrow(thing) {
@@ -43,8 +40,8 @@ function arrow(thing) {
     }
     var c = doc.getElementById("c");
     c.appendChild(elem("div", "", {}));
-    c.appendChild(elem("span", serial(thing[:3]), {"class" => "con"}));
-    c.appendChild(elem("span", thing[3:].replace(" ", "\u200b \u200b"), {"class" => "edt", "id" => "v"}));
+    c.appendChild(elem("span", serial(thing[:3]), {"class": "con"}));
+    c.appendChild(elem("span", thing[3:].replace(" ", "\u200b \u200b"), {"class": "edt", "id": "v"}));
     var v = doc.getElementById("v")
     v.onkeydown = keys;
     v.contentEditable = 'true';
@@ -57,7 +54,7 @@ function arrow(thing) {
     return st;
 } function new_print(...args) {
     var st = args.join(" ")+"\n";
-    doc.getElementById("c").appendChild(elem("div", serial(st), {"class" => "out"}));
+    doc.getElementById("c").appendChild(elem("div", serial(st), {"class": "out"}));
 } function null_print() {
 } function focuser() {
     doc.getElementById("v").focus();
@@ -85,9 +82,9 @@ function arrow(thing) {
         } catch (err) {
             out = null;
         }
-        c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class" => "rtn"}));
+        c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class": "rtn"}));
         catch (err) {
-            c.appendChild(elem("div", `${err}`, {"class" => "err"}));
+            c.appendChild(elem("div", `${err}`, {"class": "err"}));
         }
         thing = ">>> ";
         arrow(thing);
