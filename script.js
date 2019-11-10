@@ -46,11 +46,10 @@ function arrow(thing) {
     v.onkeydown = keys;
     v.contentEditable = 'true';
 } function serial(st) {
-    st = st.replace("&", "&amp;");
-    st = st.replace("<", "&lt;");
-    st = st.replace(">", "&gt;");
-    st = st.replace(" ", "\u200b \u200b");
-    st = st.replace("\n", "<br>");
+    while (st.contains(" "))
+        st = st.replace(" ", "\u200b \u200b");
+    while (st.contains("\n"))
+        st = st.replace("\n", "<br>");
     return st;
 } function new_print(...args) {
     var st = args.join(" ")+"\n";
@@ -72,7 +71,7 @@ function arrow(thing) {
         if (thing == ">>> ")
             thing = "... ";
         arrow(thing);
-        win.set_timeout(5, focuser);
+        win.setTimeout(focuser, 5);
         return;
     } try {
         exec(stdin);
@@ -87,7 +86,7 @@ function arrow(thing) {
     }
     thing = ">>> ";
     arrow(thing);
-    win.set_timeout(5, focuser);
+    win.setTimeout(focuser, 5);
     stdin = "";
   }
   catch (err) {
@@ -98,4 +97,4 @@ function arrow(thing) {
         interpret();
 }
 arrow(thing);
-win.set_timeout(5, focuser);
+win.setTimeout(focuser, 5);
