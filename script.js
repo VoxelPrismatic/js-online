@@ -40,8 +40,8 @@ function arrow(thing) {
     }
     var c = doc.getElementById("c");
     c.appendChild(elem("div", "", {}));
-    c.appendChild(elem("span", serial(thing[:3]), {"class": "con"}));
-    c.appendChild(elem("span", thing[3:].replace(" ", "\u200b \u200b"), {"class": "edt", "id": "v"}));
+    c.appendChild(elem("span", serial(thing.slice(0,3)), {"class": "con"}));
+    c.appendChild(elem("span", thing.slice(3).replace(" ", "\u200b \u200b"), {"class": "edt", "id": "v"}));
     var v = doc.getElementById("v")
     v.onkeydown = keys;
     v.contentEditable = 'true';
@@ -62,9 +62,9 @@ function arrow(thing) {
   try {
     var c = doc.getElementById("c");
     var v = doc.getElementById("v");
-    var nl = v.innerHTML.replace("\u200b", "")[1:];
+    var nl = v.innerHTML.replace("\u200b", "").slice(1);
     while (nl[-1] == " ") {
-        nl = nl[:-1];
+        nl = nl.slice(0,-1);
     } if (stdin != "") {
         stdin += "\n"+nl;
     } else {
