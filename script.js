@@ -63,9 +63,8 @@ function arrow(thing) {
     var c = doc.getElementById("c");
     var v = doc.getElementById("v");
     var nl = v.innerHTML.replace("\u200b", "").slice(1);
-    while (nl[-1] == " ") {
-        nl = nl.slice(0,-1);
-    } if (stdin != "") {
+    nl = nl.replace(/ *$/, "")
+    if (stdin != "") {
         stdin += "\n"+nl;
     } else {
         stdin = nl;
