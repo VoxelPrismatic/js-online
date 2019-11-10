@@ -58,7 +58,7 @@ function arrow(thing) {
 } function null_print() {
 } function focuser() {
     doc.getElementById("v").focus();
-} function interpret():
+} function interpret() {
   try {
     var c = doc.getElementById("c");
     var v = doc.getElementById("v");
@@ -69,15 +69,15 @@ function arrow(thing) {
         stdin += "\n"+nl;
     } else {
         stdin = nl;
-    } if (stdin[-1] == "{" || (thing.contains(".") && nl != "")):
+    } if (stdin[-1] == "{" || (thing.contains(".") && nl != "")) {
         if (thing == ">>> ")
             thing = "... ";
         arrow(thing);
         win.set_timeout(5, focuser);
         return;
-    try {
-        exec(stdin);
-        try {
+    } try {
+            exec(stdin);
+        } try {
             out = eval(stdin);
         } catch (err) {
             out = null;
@@ -90,10 +90,10 @@ function arrow(thing) {
         arrow(thing);
         win.set_timeout(5, focuser);
         stdin = "";
-  catch (err) {
-      print(ex);
   }
-function keys(k) {
+  catch (err) {
+    print(ex);
+} function keys(k) {
     if (k.key == "Enter")
         interpret();
 }
