@@ -29,6 +29,7 @@ c.appendChild(elem("div", `------ JAVASCRIPT ${ver} ;] ------`, {"style": 'text-
 c.appendChild(elem("div", `----- INTERPRETER v1.2.5 ;] -----`, {"style": 'text-align: center'}))
 var thing = ">>> ";
 var stdin = "";
+actually_log = console.log;
 function arrow(thing) {
     try {
         var v = doc.getElementById("v");
@@ -86,7 +87,7 @@ function arrow(thing) {
     stdin = "";
   }
   catch (err) {
-    print(err);
+    actually_log(err);
   }
 } function keys(k) {
     if (k.key == "Enter")
