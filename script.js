@@ -83,13 +83,13 @@ function arrow(thing) {
             out = null;
         }
         c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class": "rtn"}));
-        catch (err) {
-            c.appendChild(elem("div", `${err}`, {"class": "err"}));
-        }
-        thing = ">>> ";
-        arrow(thing);
-        win.set_timeout(5, focuser);
-        stdin = "";
+    } catch (err) {
+        c.appendChild(elem("div", `${err}`, {"class": "err"}));
+    }
+    thing = ">>> ";
+    arrow(thing);
+    win.set_timeout(5, focuser);
+    stdin = "";
   }
   catch (err) {
     print(ex);
