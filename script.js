@@ -46,9 +46,9 @@ function arrow(thing) {
     v.onkeydown = keys;
     v.contentEditable = 'true';
 } function serial(st) {
-    while (st.contains(" "))
+    while (st.includes(" "))
         st = st.replace(" ", "\u200b \u200b");
-    while (st.contains("\n"))
+    while (st.includes("\n"))
         st = st.replace("\n", "<br>");
     return st;
 } function new_print(...args) {
