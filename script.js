@@ -68,7 +68,7 @@ function arrow(thing) {
         stdin += "\n"+nl;
     } else {
         stdin = nl;
-    } if (stdin[-1] == "{" || (thing.contains(".") && nl != "")) {
+    } if (stdin[-1] == "{" || (thing.includes(".") && nl != "")) {
         if (thing == ">>> ")
             thing = "... ";
         arrow(thing);
