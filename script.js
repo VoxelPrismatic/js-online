@@ -76,8 +76,8 @@ function arrow(thing) {
         win.set_timeout(5, focuser);
         return;
     } try {
-            exec(stdin);
-        } try {
+        exec(stdin);
+        try {
             out = eval(stdin);
         } catch (err) {
             out = null;
