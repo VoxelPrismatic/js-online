@@ -93,6 +93,7 @@ function arrow(thing) {
   }
   catch (err) {
     print(ex);
+  }
 } function keys(k) {
     if (k.key == "Enter")
         interpret();
