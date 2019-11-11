@@ -46,6 +46,7 @@ function arrow(thing) {
     var v = doc.getElementById("v")
     v.onkeydown = keys;
     v.contentEditable = 'true';
+    v.focus();
 } function serial(st) {
     while (st.includes(" "))
         st = st.replace(" ", "\u200b \u200b");
@@ -59,36 +60,39 @@ function arrow(thing) {
 } function focuser() {
     doc.getElementById("v").focus();
 } function interpret() {
-  try {
-    var c = doc.getElementById("c");
-    var v = doc.getElementById("v");
-    var nl = v.innerHTML.replace("\u200b", "").slice(1);
-    nl = nl.replace(/ *$/, "");
-    if (stdin != "") {
-        stdin += "\n"+nl;
-    } else {
-        stdin = nl;
-    } if (stdin[-1] == "{" || (thing.includes(".") && nl != "")) {
-        if (thing == ">>> ")
-            thing = "... ";
+    try {
+        var c = doc.getElementById("c");
+        var v = doc.getElementById("v");
+        var nl = v.innerHTML;
+        while (nl.includes("\u200b"))
+            nl = nl.replace("\u200b", "");
+        nl = nl.replace(/ *$/, "");
+        if (nl[0] == " ")
+            nl = nl.slice(1);
+        if (stdin != "") {
+            stdin += "\n"+nl;
+        } else {
+            stdin = nl;
+        } if (stdin[-1] == "{" || (thing.includes(".") && nl != "")) {
+            if (thing == ">>> ")
+                thing = "... ";
+            arrow(thing);
+            win.setTimeout(focuser, 5);
+            return;
+        } try {
+            console.log = null_print
+            out = eval(stdin);
+            c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class": "rtn"}));
+        } catch (err) {
+            c.appendChild(elem("div", `${err}`, {"class": "err"}));
+        }
+        thing = ">>> ";
         arrow(thing);
         win.setTimeout(focuser, 5);
-        return;
-    } try {
-        console.log = null_print
-        out = eval(stdin);
-        c.appendChild(elem("div", serial("<"+(typeof out)+"> "+out), {"class": "rtn"}));
+        stdin = "";
     } catch (err) {
-        c.appendChild(elem("div", `${err}`, {"class": "err"}));
+        actually_log(err);
     }
-    thing = ">>> ";
-    arrow(thing);
-    win.setTimeout(focuser, 5);
-    stdin = "";
-  }
-  catch (err) {
-    actually_log(err);
-  }
 } function keys(k) {
     if (k.key == "Enter")
         interpret();
